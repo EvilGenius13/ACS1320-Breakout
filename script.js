@@ -5,6 +5,8 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
+let background = new Image();
+background.src = "./images/clouds.gif";
 
 let x = canvas.width/2;
 let y = canvas.height-30;
@@ -39,8 +41,6 @@ for (let c = 0; c < brickColumnCount; c++) {
   };
 };
 
-
-
 function colourSwap() {
     ballColour = colourArray[Math.floor(Math.random() * colourArray.length)];
     return ballColour;
@@ -72,7 +72,7 @@ function drawBricks() {
           bricks[c][r].y = brickY;
           ctx.beginPath();
           ctx.rect(brickX, brickY, brickWidth, brickHeight);
-          ctx.fillStyle = "#0095DD";
+          ctx.fillStyle = "grey";
           ctx.fill();
           ctx.closePath();
         };
@@ -142,13 +142,15 @@ function drawLives() {
 };
 
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(background, 0,0)
+  //ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
   drawBall();
   drawPaddle();
   drawScore();
   drawLives();
   collisionDetection();
+  
 
   if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
     dx = -dx;
@@ -174,20 +176,19 @@ function draw() {
         dx = 3;
         dy = -3;
         paddleX = (canvas.width-paddleWidth)/2;
-      }
-    }
-  }
+      };
+    };
+  };
 
   if(rightPressed && paddleX < canvas.width-paddleWidth) {
     paddleX += 10;
-  }
-  else if(leftPressed && paddleX > 0) {
+  } else if(leftPressed && paddleX > 0) {
     paddleX -= 10;
-  }
+  };
 
   x += dx;
   y += dy;
   requestAnimationFrame(draw);
-}
+};
 
 draw();
