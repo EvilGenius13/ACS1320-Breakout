@@ -1,16 +1,12 @@
 class Background {
-  constructor(width, height, color) {
-    this.width = width;
-    this.height = height;
-    this.color = color;
+  constructor(x, y, image) {
+    this.x = x;
+    this.y = y;
+    this.image = image;
   }
 
   render(ctx) {
-    ctx.beginPath();
-    ctx.rect(0, 0, this.width, this.height);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.closePath();
+    ctx.drawImage(this.image, this.x, this.y);
   }
 }
 

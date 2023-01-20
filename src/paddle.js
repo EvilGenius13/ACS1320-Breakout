@@ -2,10 +2,10 @@
 import Sprite from './Sprite.js';
 
 class Paddle extends Sprite {
-  constructor(x, y, width, height, speed, color) {
-    super(x, y, width, height, color);
+  constructor(x, y, width, height, speed, colour) {
+    super(x, y, width, height, colour);
     this.speed = speed;
-    this.color = color;
+    this.colour = colour;
   }
 }
 
