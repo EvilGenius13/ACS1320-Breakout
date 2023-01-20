@@ -1,29 +1,36 @@
-import Ball from './src/ball';
-import Paddle from './src/paddle';
-import Brick from './src/brick';
-import Bricks from './src/bricks';
-import Score from './src/score';
-// TODO: Add lives after working scenario
-// TODO: Flip background to class
+/* eslint-disable import/extensions */
+import Bricks from './Bricks.js';
 
 class Game {
-  constructor(canvasID) {
-    this.canvas = document.getElementById(canvasID);
-    this.ctx = this.canvas.getContext('2d');
-    this.ballRadius = 10;
+  constructor(canvas, ctx) {
+    this.canvas = canvas;
+    this.ctx = ctx;
 
-    this.paddleHeight = 10;
-    this.paddleWidth = 75;
-    this.paddleX = (this.canvas.width - this.paddleWidth) / 2;
-    this.paddleY = (this.canvas.height - this.paddleHeight);
+    // Background:
 
-    this.brickRowCount = 4;
-    this.brickColumnCount = 5;
+    // Ball:
+
+    // Paddle:
+
+    // Bricks:
+    this.brickRows = 4;
+    this.brickColumns = 5;
     this.brickWidth = 75;
-    this.brickHeight = 75;
+    this.brickHeight = 20;
     this.brickPadding = 10;
     this.brickOffsetTop = 30;
     this.brickOffsetLeft = 30;
+    this.brickColour = '#FF009E';
+
+    // eslint-disable-next-line max-len
+    this.bricks = new Bricks(this.brickRows, this.brickColumns, this.brickWidth, this.brickHeight, this.brickPadding, this.brickOffsetTop, this.brickOffsetLeft, this.brickColour);
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.bricks.render(this.ctx);
+
+    requestAnimationFrame(this.draw.bind(this));
   }
 }
 
