@@ -4,7 +4,7 @@ class Sprite {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.color = colour;
+    this.colour = colour;
   }
 
   render(ctx) {
