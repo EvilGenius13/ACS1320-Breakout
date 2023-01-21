@@ -10,10 +10,6 @@ class Ball extends Sprite {
     this.colour = colour;
   }
 
-  move() {
-    this.moveBy(this.dx, this.dy);
-  }
-
   render(ctx) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);

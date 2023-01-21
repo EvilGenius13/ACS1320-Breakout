@@ -135,6 +135,7 @@ class Game {
     this.bricks.render(this.ctx);
     this.score.render(this.ctx);
     this.lives.render(this.ctx);
+    this.ballMovement();
     this.paddleMove();
     requestAnimationFrame(this.draw.bind(this));
   }
