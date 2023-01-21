@@ -4,7 +4,7 @@ class Score {
     this.y = y;
     this.score = 0;
     this.font = '16px Impact';
-    this.color = '#00F0FB';
+    this.color = '#8109E5';
   }
 
   render(ctx) {

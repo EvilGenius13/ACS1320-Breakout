@@ -8,7 +8,6 @@ class Ball extends Sprite {
     this.dy = dy;
     this.radius = radius;
     this.colour = colour;
-    this.pi2 = Math.PI * 2;
   }
 
   move() {
