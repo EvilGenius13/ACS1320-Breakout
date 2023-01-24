@@ -3,8 +3,7 @@ import Background from './Background.js';
 import Ball from './Ball.js';
 import Bricks from './Bricks.js';
 import Paddle from './Paddle.js';
-import Score from './Score.js';
-import Lives from './Lives.js';
+import GameLabel from './GameLabel.js';
 
 class Game {
   constructor(canvas, ctx) {
@@ -58,9 +57,9 @@ class Game {
       this.brickColour,
     );
     // ? Score:
-    this.score = new Score(8, 20);
+    this.GameLabelScore = new GameLabel('Score', 8, 20);
     // ? Lives:
-    this.lives = new Lives(this.canvas.width - 65, 20, 3);
+    this.GameLabelLives = new GameLabel('Lives', this.canvas.width - 65, 20);
 
     this.loadListeners();
     this.draw();
@@ -70,6 +69,7 @@ class Game {
     document.addEventListener('keydown', this.keyDownHandler.bind(this), false);
     document.addEventListener('keyup', this.keyUpHandler.bind(this), false);
     document.addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
+    this.GameLabelLives.value = 3;
   }
 
   keyDownHandler(e) {
@@ -96,13 +96,12 @@ class Game {
   }
 
   movePaddle() {
-    /* User paddle controls */
     if (this.rightPressed && this.paddle.x < this.canvas.width - this.paddle.width) {
       this.paddle.moveBy(7, 0);
     } else if (this.leftPressed && this.paddle.x > 0) {
       this.paddle.moveBy(-7, 0);
     }
-  } // end movepaddle
+  }
 
   ballMovement() {
     if (this.ball.x + this.ball.dx > this.canvas.width - this.ballRadius
@@ -115,8 +114,8 @@ class Game {
       if (this.ball.x > this.paddle.x && this.ball.x < this.paddle.x + this.paddleWidth) {
         this.ball.dy = -this.ball.dy;
       } else {
-        this.lives.loseLives();
-        if (!this.lives.lives) {
+        this.GameLabelLives.value -= 1;
+        if (!this.GameLabelLives.value) {
           // eslint-disable-next-line no-alert
           alert('GAME OVER');
           document.location.reload();
@@ -125,7 +124,6 @@ class Game {
           this.ball.y = this.canvas.height - 30;
           this.ball.dx = 3;
           this.ball.dy = -3;
-          // this.ball.paddleX = (this.canvas.width - this.paddleWidth) / 2;
         }
       }
     }
@@ -140,10 +138,10 @@ class Game {
             && this.ball.y > brick.y && this.ball.y < brick.y + this.brickHeight) {
             this.ball.dy = -this.ball.dy;
             brick.status = 0;
-            this.score.score += 1;
-            if (this.score.score === this.bricks.columns * this.bricks.rows) {
+            this.GameLabelScore.value += 1;
+            if (this.GameLabelScore.value === this.bricks.columns * this.bricks.rows) {
               // eslint-disable-next-line no-alert
-              alert(`You Win, Congratulations! You scored ${this.score.score} points.`);
+              alert(`Congratulations, You Win! You scored ${this.GameLabelScore.value} points.`);
             }
           }
         }
@@ -157,13 +155,12 @@ class Game {
     this.ball.render(this.ctx);
     this.paddle.render(this.ctx);
     this.bricks.render(this.ctx);
-    this.score.render(this.ctx);
-    this.lives.render(this.ctx);
+    this.GameLabelScore.render(this.ctx);
+    this.GameLabelLives.render(this.ctx);
     this.collisionDetection();
     this.ball.move();
     this.movePaddle();
     this.ballMovement();
-
     requestAnimationFrame(this.draw.bind(this));
   }
 }
