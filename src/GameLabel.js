@@ -10,14 +10,6 @@ class GameLabel extends Sprite {
     this.font = font;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  ending(message, canvasWidth, canvasHeight, ctx) {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.font = '32px Impact';
-    ctx.fillStyle = '#8109E5';
-    ctx.fillText(message, 170, canvasHeight / 2);
-  }
-
   render(ctx) {
     ctx.font = this.font;
     ctx.fillStyle = this.colour;
