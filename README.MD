@@ -16,4 +16,4 @@ I recommend using Liveserver in VSCODE
 
 ## Screenshots
 
-![App Screenshot](https://imgur.com/pYUcRqY)
+![App Screenshot](https://imgur.com/pYUcRqY.png)
